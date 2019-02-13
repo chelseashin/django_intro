@@ -9,12 +9,12 @@
 <body>
     {% for menu in menus %}
         <p>{{ menu }}</p>
-    {# endfor %}
+    {% endfor %}
     <hr>
     {% if pick == 'sushi' %}
         <p>연어 초밥 !!!</p>
     {% else %}
         <p>{{ pick }}</p>
-    {# endif #}
+    {% endif %}
 </body>
 </html>
