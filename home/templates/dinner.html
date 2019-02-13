@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dinner</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}dinner{% endblock %}
+{% block body %}
     {% for menu in menus %}
         <p>{{ menu }}</p>
     {% endfor %}
@@ -16,5 +10,4 @@
     {% else %}
         <p>{{ pick }}</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}

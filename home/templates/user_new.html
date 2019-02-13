@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>user_new</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}user_new{% endblock %}
+{% block body %}
     <form action='/home/user_create/' method='POST'>
         <!--사이트 위조 방지-->
         {% csrf_token %} 
@@ -14,5 +8,4 @@
         <input type="password" name ="pwd">
         <input type="submit" value ="Submit">
     </form>
-</body>
-</html>
+{% endblock %}

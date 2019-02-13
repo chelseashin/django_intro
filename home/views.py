@@ -31,4 +31,4 @@ def user_new(request):
 def user_create(request):
     nickname = request.POST.get('nickname')
     pwd = request.POST.get('pwd')
-    return render(request, 'user_create.html', {'nickname':nickname, {'pwd'}:pwd})
+    return render(request, 'user_create.html', {'nickname' : nickname, 'pwd' : pwd})

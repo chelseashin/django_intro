@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PING</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}PING{% endblock %}
+{% block body %}
     <form action='/home/pong'>
         <input type="text" name ="data">
         <input type="submit" value ="Submit">
     </form>
-</body>
-</html>
+{% endblock %}
