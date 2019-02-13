@@ -18,6 +18,10 @@ from django.urls import path
 from home import views
 
 urlpatterns = [
+    path('home/user_create/', views.user_create, name='user_create'),
+    path('home/user_new/', views.user_new, name='user_new'),
+    path('home/pong/', views.pong, name='pong'),
+    path('home/ping/', views.ping, name='ping'),
     path('home/cube/<int:number>/', views.cube, name= 'cube'),
     path('home/hello/<name>/', views.hello, name= 'hello'),
     path('home/dinner/', views.dinner, name= 'dinner'),
