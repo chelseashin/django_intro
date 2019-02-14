@@ -1,0 +1,17 @@
+{% extends 'base.html' %} 
+{% block title %}ASCII_NEW{% endblock %} 
+
+{% block body %}
+<form action='/utilities/ascii_make'>
+    <h3>ascii art로 변환할 text, font 입력</h3>
+    <input type="text" name="data">
+    <select name='fonts'>
+      <option value="short">short</option>
+      <option value="utopia">utopia</option>
+      <option value="rounded">rounded</option>
+      <option value="acrobatic">acrobatic</option>
+      <option value="alligator">alligator</option>
+    </select>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}
