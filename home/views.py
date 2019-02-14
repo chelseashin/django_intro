@@ -46,3 +46,6 @@ def template_example(request):
                  'messages': messages, 'empty_list': empty_list,
                  'datetimenow' : datetimenow
                 })
+                
+def static_example(request):
+    return render(request, 'static_example.html')

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+<!--이미지 첨부 시 필수로 써줘야 함-->
+{% load static %}
+
+{% block title %}STATIC{% endblock %}
+
+<!-- style.css와 연동-->
+{% block css %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css"/>
+{% endblock %}
+
+<!--이미지 첨부-->
+{% block body%}
+    <img src="{% static 'bangkok.jpg' %}" alt="image"></img>
+{% endblock %}
