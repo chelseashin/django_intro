@@ -2,6 +2,7 @@ from django.shortcuts import render
 from datetime import datetime
 import requests
 import json
+import os
 
 # Create your views here.
 def index(request):
@@ -11,17 +12,15 @@ def index(request):
 def bye(request):
     today = datetime.now()
     goodbye = datetime(2019, 2, 28, 18, 00)
-    remain = goodbye - today
-    return render(request, 'utilities/bye.html', {'today': today, 'goodbye': goodbye, 'remain' : remain})
+    remain = (goodbye - today).hours()
+    return render(request, 'utilities/bye.html', {'remain' : remain})
 
 # 우리 1학기 졸업시간까지 남은 날짜 출력하기 - 5월 18일까지 남은 시간
 def graduation(request):
-    today = datetime(2019, 2, 14)
+    today = datetime.now()
     goodbye = datetime(2019, 5, 18)
-    # today = datetime.now()
-    # goodbye = datetime(2019, 5, 18, 18, 00)
-    days = goodbye - today
-    return render(request, 'utilities/graduation.html', {'today': today,'goodbye': goodbye, 'days' : days})
+    days = (goodbye - today).days
+    return render(request, 'utilities/graduation.html', {'days' : days})
     
 # Lorem Picsum 활용하여 랜덤 이미지 출력하기
 def imagepick(request):
@@ -30,8 +29,8 @@ def imagepick(request):
 # 오늘 시간 및 날씨 정보 알려주기(지금 살고 있는 기준으로)
 def today(request):
     today = datetime.now()
-
-    url = "https://api.openweathermap.org/data/2.5/weather?q=Daejeon,kr&lang=kr&APPID=50ab815ce98dcf57d58d4547ccd3dbef"
+    WEATHER_TOKEN = os.getenv("WEATHER_TOKEN")
+    url = f"https://api.openweathermap.org/data/2.5/weather?q=Daejeon,kr&lang=kr&APPID={WEATHER_TOKEN}"
     data = requests.get(url).json()
     weather = data['weather'][0]['description']
     temp = round(data['main']['temp'] - 273.15)
@@ -45,10 +44,11 @@ def today(request):
 def ascii_new(request):
     return render(request, 'utilities/ascii_new.html')
 
-# artii를 활용하여 art로 만들어서 출력해주기
+# ascii를 활용하여 art로 만들어서 출력해주기
 def ascii_make(request):
     data = request.GET.get('data')
     fonts = request.GET.get('fonts')
+    # 반복문으로 풀기 : fonts = ['short', 'utopia', 'rounded', 'acrobatic', 'alligator']
     url = f"http://artii.herokuapp.com/make?text={data}&font={fonts}"
     show = requests.get(url).text
     return render(request, 'utilities/ascii_make.html', {'show': show})
@@ -59,23 +59,23 @@ def original(request):
 
 # papago 활용하여 한-영 번역 해주기
 def translated(request):
-    word = requests.GET.get('word')
-    naver_client_id = os.getenv("VdaDzu1w6SJRN96h2EuZ")
-    naver_client_secret = os.getenv("NAVER_CLIENT_SECRET")
+    naver_client_id = os.getenv("PAPAGO_ID_TOKEN")
+    naver_client_secret = os.getenv("PAPAGO_PW_TOKEN")
     
     papago_url = "https://openapi.naver.com/v1/papago/n2mt"
     # 네이버에 Post 요청을 위해서 필요한 내용들
     headers = {
-        "X-Naver-Client-Id": naver_client_id,
-        "X-Naver-Client-Secret": naver_client_secret
+        "PAPAGO_ID_TOKEN": naver_client_id,
+        "PAPAGO_PW_TOKEN": naver_client_secret
     }
     data = {
         "source": "ko",
         "target": "en",
-        "text": text[4:]
+        "text": request.GET.get('text')
     }
     papago_response = requests.post(papago_url, headers=headers, data=data).json()
-    print(papago_response)
-    reply_text = papago_response["message"]["result"]["translatedText"]
+    # print(papago_response)
+    reply_text = papago_response
+    # reply_text = papago_response["message"]["result"]["translatedText"]
     
-    return render(request, 'utilities/translated.html', {'result': result})
+    return render(request, 'utilities/translated.html', {'reply_text': reply_text})

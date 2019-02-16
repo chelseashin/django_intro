@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}today{% endblock %}
 {% block body %}
-    <h1>오늘의 날씨 정보</h1>
+    <h1>오늘 대전의 날씨 정보</h1>
     <hr>
     <h3>현재 시간 : {{today}}</h3>
     <h3>현재 날씨 : {{weather}}</h3>
-    <h3>평균온도 : {{temp}}</h3>
-    <h3>최저온도 : {{min_temp}}</h3>
-    <h3>최고온도 : {{max_temp}}</h3>
+    <h3>평균온도 : {{temp}}℃</h3>
+    <h3>최저온도 : {{min_temp}}℃</h3>
+    <h3>최고온도 : {{max_temp}}℃</h3>
 {% endblock %}
